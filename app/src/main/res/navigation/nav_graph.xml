@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/albumsFragment">
+
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="com.company.roomfloyd.AlbumsFragment"
+        android:label="fragment_albums"
+        tools:layout="@layout/fragment_albums" >
+        <action
+            android:id="@+id/action_albumsFragment_to_insertarAlbumFragment"
+            app:destination="@id/insertarAlbumFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertarAlbumFragment"
+        android:name="com.company.roomfloyd.InsertarAlbumFragment"
+        android:label="fragment_inertar_album"
+        tools:layout="@layout/fragment_insertar_album" />
+</navigation>
