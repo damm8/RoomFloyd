@@ -14,21 +14,21 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.company.roomfloyd.databinding.FragmentAlbumsBinding;
+import com.company.roomfloyd.databinding.FragmentListaAlbumsBinding;
 import com.company.roomfloyd.databinding.ViewholderAlbumBinding;
 
 import java.util.List;
 
 
-public class AlbumsFragment extends Fragment {
+public class ListaAlbumsFragment extends Fragment {
 
-    FragmentAlbumsBinding binding;
+    FragmentListaAlbumsBinding binding;
     NavController navController;
     AlbumsViewModel albumsViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (binding = FragmentAlbumsBinding.inflate(inflater, container, false)).getRoot();
+        return (binding = FragmentListaAlbumsBinding.inflate(inflater, container, false)).getRoot();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class AlbumsFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         binding.irAInsertarAlbum.setOnClickListener(v -> {
-            navController.navigate(R.id.action_albumsFragment_to_insertarAlbumFragment);
+            navController.navigate(R.id.action_listaAlbumsFragment_to_insertarAlbumFragment);
         });
 
         AlbumsAdapter albumsAdapter = new AlbumsAdapter();

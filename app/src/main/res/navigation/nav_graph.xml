@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumsFragment">
+    app:startDestination="@id/listaAlbumsFragment">
 
     <fragment
-        android:id="@+id/albumsFragment"
-        android:name="com.company.roomfloyd.AlbumsFragment"
-        android:label="fragment_albums"
-        tools:layout="@layout/fragment_albums" >
+        android:id="@+id/listaAlbumsFragment"
+        android:name="com.company.roomfloyd.ListaAlbumsFragment"
+        android:label="fragment_lista_albums"
+        tools:layout="@layout/fragment_lista_albums" >
         <action
-            android:id="@+id/action_albumsFragment_to_insertarAlbumFragment"
+            android:id="@+id/action_listaAlbumsFragment_to_insertarAlbumFragment"
             app:destination="@id/insertarAlbumFragment" />
     </fragment>
     <fragment

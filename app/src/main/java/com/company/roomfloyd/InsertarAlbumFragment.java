@@ -48,11 +48,13 @@ public class InsertarAlbumFragment extends Fragment {
 
 
         binding.insertar.setOnClickListener(v -> {
-            if(imagenSeleccionada != null) {
+            if (imagenSeleccionada != null) {
                 String titulo = binding.titulo.getText().toString();
                 String anyo = binding.anyo.getText().toString();
 
                 albumsViewModel.insertarAlbum(titulo, anyo, imagenSeleccionada.toString());
+
+                albumsViewModel.establecerImagenSeleccionada(null);
                 navController.popBackStack();
             } else {
                 Toast.makeText(requireContext(), "Seleccione una imagen", Toast.LENGTH_SHORT).show();
@@ -60,11 +62,7 @@ public class InsertarAlbumFragment extends Fragment {
         });
 
         binding.seleccionarPortada.setOnClickListener(v -> {
-            if (checkSelfPermission(requireContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED) {
-                abrirGaleria();
-            } else {
-                lanzadorPermisos.launch(READ_EXTERNAL_STORAGE);
-            }
+            abrirGaleria();
         });
 
         albumsViewModel.imagenSeleccionada.observe(getViewLifecycleOwner(), uri -> {
@@ -73,19 +71,26 @@ public class InsertarAlbumFragment extends Fragment {
         });
     }
 
+
+    /* https://developer.android.com/training/permissions/requesting */
+
+    private void abrirGaleria(){
+        if (checkSelfPermission(requireContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED) {
+            lanzadorGaleria.launch("image/*");
+        } else {
+            lanzadorPermisos.launch(READ_EXTERNAL_STORAGE);
+        }
+    }
+
+    private final ActivityResultLauncher<String> lanzadorGaleria =
+            registerForActivityResult(new GetContent(), uri -> {
+                albumsViewModel.establecerImagenSeleccionada(uri);
+            });
+
     private final ActivityResultLauncher<String> lanzadorPermisos =
             registerForActivityResult(new RequestPermission(), isGranted -> {
                 if (isGranted) {
-                    abrirGaleria();
+                    lanzadorGaleria.launch("image/*");
                 }
             });
-
-    private final ActivityResultLauncher<String> lanzadorGaleria =
-            registerForActivityResult(new GetContent(), uri ->
-                    albumsViewModel.establecerImagenSeleccionada(uri)
-            );
-
-    private void abrirGaleria(){
-        lanzadorGaleria.launch("image/*");
-    }
 }

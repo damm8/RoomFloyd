@@ -12,28 +12,31 @@ import androidx.room.RoomDatabase;
 
 import java.util.List;
 
+/* https://developer.android.com/training/data-storage/room */
+
 @Database(entities = {Album.class}, version = 1, exportSchema = false)
 public abstract class AppBaseDeDatos extends RoomDatabase {
 
-    public abstract AppDao obtenerDao();
+    public abstract AlbumsDao obtenerAlbumsDao();
 
-    private static volatile AppBaseDeDatos INSTANCE;
+    private static volatile AppBaseDeDatos db;
 
     public static AppBaseDeDatos getInstance(final Context context){
-        if (INSTANCE == null){
+        if (db == null) {
             synchronized (AppBaseDeDatos.class) {
-                if(INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context, AppBaseDeDatos.class, "app.db")
+                if (db == null) {
+                    db = Room.databaseBuilder(context, AppBaseDeDatos.class, "app.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }
             }
         }
-        return INSTANCE;
+
+        return db;
     }
 
     @Dao
-    public interface AppDao {
+    public interface AlbumsDao {
         @Insert
         void insertarAlbum(Album album);
 

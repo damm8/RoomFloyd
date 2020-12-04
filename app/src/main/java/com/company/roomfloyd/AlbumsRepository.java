@@ -12,10 +12,10 @@ public class AlbumsRepository {
 
     Executor executor = Executors.newSingleThreadExecutor();
 
-    AppBaseDeDatos.AppDao dao;
+    AppBaseDeDatos.AlbumsDao dao;
 
     AlbumsRepository(Application application) {
-        dao = AppBaseDeDatos.getInstance(application).obtenerDao();
+        dao = AppBaseDeDatos.getInstance(application).obtenerAlbumsDao();
     }
 
 
