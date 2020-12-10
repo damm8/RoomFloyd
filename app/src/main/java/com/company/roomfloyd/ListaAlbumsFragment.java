@@ -46,7 +46,7 @@ public class ListaAlbumsFragment extends Fragment {
         AlbumsAdapter albumsAdapter = new AlbumsAdapter();
         binding.recyclerView.setAdapter(albumsAdapter);
 
-        albumsViewModel.albums().observe(getViewLifecycleOwner(), albums -> {
+        albumsViewModel.obtenerAlbums().observe(getViewLifecycleOwner(), albums -> {
             albumsAdapter.setAlbumList(albums);
         });
     }

@@ -1,4 +1,4 @@
-    package com.company.roomfloyd;
+package com.company.roomfloyd;
 
 import android.net.Uri;
 import android.os.Bundle;

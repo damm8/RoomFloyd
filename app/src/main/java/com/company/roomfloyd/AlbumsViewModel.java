@@ -23,8 +23,8 @@ public class AlbumsViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<Album>> albums() {
-        return albumsRepository.albums();
+    public LiveData<List<Album>> obtenerAlbums() {
+        return albumsRepository.obtenerAlbums();
     }
 
     void insertarAlbum(String titulo, String anyo, String portada) {

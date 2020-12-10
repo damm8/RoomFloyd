@@ -19,7 +19,7 @@ public class AlbumsRepository {
     }
 
 
-    LiveData<List<Album>> albums() {
+    LiveData<List<Album>> obtenerAlbums() {
         return dao.obtenerAlbums();
     }
 
