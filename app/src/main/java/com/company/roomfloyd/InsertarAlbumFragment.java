@@ -1,4 +1,4 @@
-package com.company.roomfloyd;
+    package com.company.roomfloyd;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,13 +61,15 @@ public class InsertarAlbumFragment extends Fragment {
             }
         });
 
-        binding.seleccionarPortada.setOnClickListener(v -> {
+        binding.portada.setOnClickListener(v -> {
             abrirGaleria();
         });
 
         albumsViewModel.imagenSeleccionada.observe(getViewLifecycleOwner(), uri -> {
-            imagenSeleccionada = uri;
-            Glide.with(requireView()).load(uri).into(binding.previsualizarPortada);
+            if (uri != null) {
+                imagenSeleccionada = uri;
+                Glide.with(requireView()).load(uri).into(binding.portada);
+            }
         });
     }
 
