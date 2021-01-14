@@ -46,7 +46,6 @@ public class InsertarAlbumFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-
         binding.insertar.setOnClickListener(v -> {
             if (imagenSeleccionada != null) {
                 String titulo = binding.titulo.getText().toString();
@@ -62,7 +61,7 @@ public class InsertarAlbumFragment extends Fragment {
         });
 
         binding.portada.setOnClickListener(v -> {
-            abrirGaleria();
+            lanzadorGaleria.launch("image/*");
         });
 
         albumsViewModel.imagenSeleccionada.observe(getViewLifecycleOwner(), uri -> {
@@ -73,26 +72,7 @@ public class InsertarAlbumFragment extends Fragment {
         });
     }
 
-
-    /* https://developer.android.com/training/permissions/requesting */
-
-    private void abrirGaleria(){
-        if (checkSelfPermission(requireContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED) {
-            lanzadorGaleria.launch("image/*");
-        } else {
-            lanzadorPermisos.launch(READ_EXTERNAL_STORAGE);
-        }
-    }
-
-    private final ActivityResultLauncher<String> lanzadorGaleria =
-            registerForActivityResult(new GetContent(), uri -> {
-                albumsViewModel.establecerImagenSeleccionada(uri);
-            });
-
-    private final ActivityResultLauncher<String> lanzadorPermisos =
-            registerForActivityResult(new RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    lanzadorGaleria.launch("image/*");
-                }
-            });
+    private final ActivityResultLauncher<String> lanzadorGaleria = registerForActivityResult(new GetContent(), uri -> {
+        albumsViewModel.establecerImagenSeleccionada(uri);
+    });
 }
