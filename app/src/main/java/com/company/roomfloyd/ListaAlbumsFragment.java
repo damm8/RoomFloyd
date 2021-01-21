@@ -14,6 +14,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.company.roomfloyd.databinding.FragmentListaAlbumsBinding;
 import com.company.roomfloyd.databinding.ViewholderAlbumBinding;
 
@@ -68,7 +71,10 @@ public class ListaAlbumsFragment extends Fragment {
 
             holder.binding.titulo.setText(album.titulo);
             holder.binding.anyo.setText(album.anyo);
-            Glide.with(holder.itemView).load(album.portada).into(holder.binding.portada);
+            Glide.with(holder.itemView)
+                    .load(album.portada)
+                    .transform(new RoundedCorners(64))
+                    .into(holder.binding.portada);
         }
 
         @Override
