@@ -18,7 +18,6 @@ public class AlbumsRepository {
         dao = AppBaseDeDatos.getInstance(application).obtenerAlbumsDao();
     }
 
-
     LiveData<List<Album>> obtenerAlbums() {
         return dao.obtenerAlbums();
     }

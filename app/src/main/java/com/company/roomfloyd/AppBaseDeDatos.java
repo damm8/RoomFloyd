@@ -19,8 +19,7 @@ import java.util.concurrent.Executors;
 
 /* https://developer.android.com/training/data-storage/room */
 
-@Database(entities = {Album.class}, version = 2
-        , exportSchema = false)
+@Database(entities = {Album.class}, version = 2, exportSchema = false)
 public abstract class AppBaseDeDatos extends RoomDatabase {
 
     static Executor executor = Executors.newSingleThreadExecutor();
@@ -58,7 +57,7 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
 
     private static void insertarDatosIniciales(AlbumsDao dao) {
         List<Album> albums = Arrays.asList(
-                new Album("The Piper at the Gates of Dawn", "1967", "file:///android_asset/piper.jpg"),
+                new Album("The Pipersss at the Gates of Dawn", "1967", "file:///android_asset/piper.jpg"),
                 new Album("A Saucerful of Secrets","1968","file:///android_asset/secrets.jpg"),
                 new Album("Ummagumma","1969","file:///android_asset/ummagumma.jpg"),
                 new Album("Atom Heart Mother","1970","file:///android_asset/atom.jpg"),
@@ -79,9 +78,8 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
                 new Album("The Late Years","2019","file:///android_asset/late.jpg")
         );
 
-        executor.execute(() -> {
-            for(Album album:albums)
-                dao.insertarAlbum(album);
+        executor.execute(()-> {
+            dao.insertarAlbums(albums);
         });
     }
 
@@ -89,6 +87,9 @@ public abstract class AppBaseDeDatos extends RoomDatabase {
     public interface AlbumsDao {
         @Insert
         void insertarAlbum(Album album);
+
+        @Insert
+        void insertarAlbums(List<Album> albums);
 
         @Query("SELECT * FROM Album")
         LiveData<List<Album>> obtenerAlbums();
